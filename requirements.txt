@@ -1,0 +1,3 @@
+schedule
+pynvml
+nvidia-ml-py3

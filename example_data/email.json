@@ -1,0 +1,7 @@
+{
+    "server":"smtp.exmail.qq.com",
+    "port": 465,
+    "useSSL": true,
+    "username": "",
+    "password": ""
+}
