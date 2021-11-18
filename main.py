@@ -22,7 +22,7 @@ def job():
             if len(device["used_by"])==0:
                 cur_free = True
                 if last_free==False and cur_free==True:
-                    with SmtpClient(smtp_config.server) as smtp_client:
+                    with SmtpClient(smtp_config.server,smtp_config.port,smtp_config.useSSL) as smtp_client:
                         smtp_client.login(smtp_config.username,smtp_config.password)
                         smtp_client.sendText(subscribe,subject="GPU MACHINE FREE NOTIFICATION",contain=json.dumps(usage,indent=4,ensure_ascii=False))
                     break
@@ -33,7 +33,7 @@ def job():
                 "timestamp": datetime.datetime.now().timestamp(),
                 "time": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             }
-            f.write(f"{json.dumps(obj,ensure_ascii=True)}\n")
+            f.write(f"{json.dumps(obj,ensure_ascii=False)}\n")
             f.flush()
 
 
