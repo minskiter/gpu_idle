@@ -10,3 +10,10 @@
 1. fill example_data
 2. rename example_data to data
 3. run demo.sh
+
+### How to stop it
+
+0. command
+``` sh
+kill -9 $(cat run.pid)
+```
