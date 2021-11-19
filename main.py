@@ -21,12 +21,12 @@ def job():
         for device in usage:
             if len(device["used_by"])==0:
                 cur_free = True
-                # when state change
-            if last_free != cur_free:
-                with SmtpClient(smtp_config.server,smtp_config.port,smtp_config.useSSL) as smtp_client:
-                    smtp_client.login(smtp_config.username,smtp_config.password)
-                    smtp_client.sendText(subscribe,subject="GPU MACHINE FREE NOTIFICATION",contain=json.dumps(usage,indent=4,ensure_ascii=False))
                 break
+        # when state change
+        if last_free != cur_free:
+            with SmtpClient(smtp_config.server,smtp_config.port,smtp_config.useSSL) as smtp_client:
+                smtp_client.login(smtp_config.username,smtp_config.password)
+                smtp_client.sendText(subscribe,subject="GPU MACHINE FREE NOTIFICATION",contain=json.dumps(usage,indent=4,ensure_ascii=False))
         last_free = cur_free
         with open(logfile,"a+",encoding="utf-8") as f:
             obj = {
