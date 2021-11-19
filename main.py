@@ -6,7 +6,7 @@ from obj import DictObj
 import schedule
 import datetime
 
-last_free = True
+last_free = None
 
 def job():
     global last_free
@@ -23,7 +23,7 @@ def job():
                 cur_free = True
                 break
         # when state change
-        if last_free != cur_free:
+        if last_free is not None and last_free != cur_free:
             with SmtpClient(smtp_config.server,smtp_config.port,smtp_config.useSSL) as smtp_client:
                 smtp_client.login(smtp_config.username,smtp_config.password)
                 smtp_client.sendText(subscribe,subject="GPU MACHINE FREE NOTIFICATION",contain=json.dumps(usage,indent=4,ensure_ascii=False))
